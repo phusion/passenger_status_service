@@ -1,0 +1,14 @@
+<% apps.each do |app| %>
+  <table class="table table-striped table-resource-list">
+    <tr>
+      <td class="name"><%= link_to app.name, app %></td>
+      <td class="actions">
+        <%= link_to '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'.html_safe,
+              app, method: "delete", class: "btn btn-xs btn-danger",
+              data: { confirm: "Are you sure? All data will be destroyed. THERE IS NO TURNING BACK!" } %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+<p><%= link_to "Register another app", new_app_path, class: "btn btn-primary" %></p>

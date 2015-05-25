@@ -1,0 +1,12 @@
+<div class="intro-container">
+  <p>
+    Please setup the status report sending agent for the <%= @app.name %> app. The agent will send data to us, which will be displayed here.
+  </p>
+  <p>
+    <%= link_to "Setup agent now", setup_app_path(@app), class: "btn btn-primary" %>
+  </p>
+  <p>
+    <small><%= link_to "\"I've already setup the agent. Why doesn't anything show up?\"",
+      controller: "welcome", action: "faq", anchor: "data_not_showing_up" %></small>
+  </p>
+</div>

@@ -98,13 +98,27 @@ body, html {
   font-size: small;
 }
 
-.image-align-right {
+.img-align-right {
   float: right;
   margin: 0 0 2em 2em;
+}
+
+figure {
+  display: block;
+  text-align: center;
+  margin: 1em;
+}
+
+figure img {
+  max-width: 100%;
 }
 
 .intro-container {
   max-width: 50%;
   text-align: center;
   margin: 1em auto 1em auto;
+}
+
+.table-resource-list .name {
+  width: 100%;
 }

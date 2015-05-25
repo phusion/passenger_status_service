@@ -1,10 +1,33 @@
+# == Schema Information
+#
+# Table name: apps
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
+#  name       :string           not null
+#  api_token  :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_apps_on_api_token  (api_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_apps_user_id  (user_id => users.id)
+#
+
 class App < ActiveRecord::Base
   belongs_to :user, inverse_of: 'apps'
   has_many :statuses, inverse_of: 'app'
 
-  attr_accessor :accept_tos
-
   default_value_for(:api_token) { App.generate_api_token }
+
+  attr_accessor :tos
+
+  validates :name, :api_token, presence: true
+  validates :tos, acceptance: true, if: :new_record?
 
   def self.generate_api_token
     time   = Time.now.to_i.to_s(36).ljust(8, "-")

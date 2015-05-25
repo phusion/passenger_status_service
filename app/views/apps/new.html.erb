@@ -2,23 +2,22 @@
 <div class="page-header page-header-integrated">
   <h1>New app</h1>
   <div class="back">
-    <%= link_to "&laquo; Back to My Apps".html_safe %>
+    <%= link_to "&laquo; Back to My Apps".html_safe, apps_path %>
   </div>
 </div>
 
 <%= form_for(@app) do |f| %>
-  <div class="form-group">
-    <%= f.label_for :name %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
+  <%= render partial: "form", locals: { f: f } %>
 
   <div class="checkbox">
     <label>
-      <%= f.check_box :accept_tos %>
-      I accept the <%= link_to "terms and conditions" %>
+      <%= f.check_box :tos %>
+      I accept the <%= link_to "terms and conditions", controller: "welcome", action: "tos" %><br>
+      <small>Seriously, you should read it. It's important and very short.</small>
     </label>
   </div>
-  <div>
-    <small>Seriously, you should read it. It's important and very short.</small>
-  </div>
+
+  <p class="actions">
+    <%= f.submit "Register", class: "btn btn-primary" %>
+  </p>
 <% end %>

@@ -1,4 +1,12 @@
 class StatusesController < ApplicationController
+  before_action :authenticate_user!
+  before_filter :find_app
+  before_filter :find_status, only: [:edit, :show, :update, :destroy]
+
+  def index
+    @statuses = @app.statuses
+  end
+
   def create
     status = Status.new_from_params(params)
     if !status.accept_tos?
@@ -34,6 +42,21 @@ class StatusesController < ApplicationController
       else
         render_404
       end
+    end
+  end
+
+private
+  def find_app
+    @app = current_user.apps.find(params[:app_id])
+    if @app.nil?
+      render action: 'apps/not_found', status: 404
+    end
+  end
+
+  def find_status
+    @status = @app.statuses.find(params[:app_id])
+    if @status.nil?
+      render action: 'not_found', status: 404
     end
   end
 end

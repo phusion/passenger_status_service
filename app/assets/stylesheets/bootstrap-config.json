@@ -400,14 +400,11 @@
     "media.less",
     "list-group.less",
     "panels.less",
-    "responsive-embed.less",
     "wells.less",
     "close.less",
     "component-animations.less",
     "dropdowns.less",
-    "tooltip.less",
-    "popovers.less",
-    "modals.less"
+    "popovers.less"
   ],
   "js": [
     "dropdown.js",
@@ -417,5 +414,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=1ad9bce36cf2f4ae71f5"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=24605bb6ca5a6a2b7f60"
 }

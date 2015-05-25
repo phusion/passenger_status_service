@@ -36,7 +36,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    annotate_models (0.0.4)
+    annotate (2.6.10)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
     arel (6.0.0)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
@@ -194,7 +196,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  annotate_models
+  annotate (~> 2.6.6)
   bcrypt (~> 3.1.7)
   byebug
   capistrano-rails

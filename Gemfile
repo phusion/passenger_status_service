@@ -33,7 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 group :development do
   gem 'capistrano-rails'
   gem 'quiet_assets'
-  gem 'annotate_models'
+  gem 'annotate', '~> 2.6.6'
 end
 
 group :development, :test do
