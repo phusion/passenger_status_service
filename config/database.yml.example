@@ -1,0 +1,8 @@
+production:
+  adapter: postgresql
+  host: localhost
+  username: foo
+  password: bar
+  database: passenger_status_service
+  pool: 5
+  timeout: 5000

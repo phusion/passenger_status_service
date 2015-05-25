@@ -1,0 +1,52 @@
+<% @title = "FAQ" %>
+<div class="page-header page-header-integrated">
+  <h1>FAQ</h1>
+</div>
+
+<strong>Table of contents</strong>
+<ul>
+  <li><a href="#what">What is the Passenger Status Service?</a></li>
+  <li><a href="#selfhost">Can I self-host the Passenger Status Service?</a></li>
+  <li><a href="#non_heroku">Does the Service work with apps not hosted on Heroku?</a></li>
+  <li><a href="#enterprise">Does the Service work with Passenger Enterprise?</a></li>
+  <li><a href="#what_data">What kind of data does the agent send?</a></li>
+  <li><a href="#agent_source">Where can I find the source code of the Passenger Status Service Agent?</a></li>
+  <li><a href="#agent_not_sending_data">The Service doesn't seem to receive any data from the agent. How do I troubleshoot this?</a></li>
+</ul>
+
+<hr>
+
+<h3 id="what">What is the Passenger Status Service?</h3>
+<p>
+  Please refer to <%= link_to "the front page", root_path %> to learn more.
+</p>
+
+<h3 id="selfhost">Can I self-host the Passenger Status Service?</h3>
+<p>
+  Yes. The Passenger Status Service app is a Rails app, <a href="https://github.com/phusion/passenger_status_service">available on Github</a> and is MIT-licensed.
+</p>
+
+<h3 id="non_heroku">Does the Service work with apps not hosted on Heroku?</h3>
+<p>
+  Yes. The Passenger Status Service works with apps hosted on any infrastructure. But it is primarily Heroku users that need this service, which is why.
+</p>
+
+<h3 id="enterprise">Does the Service work with <a href="https://www.phusionpassenger.com/enterprise">Passenger Enterprise</a>?</h3>
+<p>
+  Yes. No additional configuration is necessary. The setup instructions we provide are compatible with both Passenger open source and Passenger Enterprise.
+</p>
+
+<h3 id="what_data">What kind of data does the agent send?</h3>
+<p>
+  The output of the <code>passenger-status</code> command and the host name.
+</p>
+
+<h3 id="agent_source">Where can I find the source code of the Passenger Status Service Agent?</h3>
+<p>
+  See its <a href="https://github.com/phusion/passenger_status_service_agent">Github repository</a>.
+</p>
+
+<h3 id="agent_not_sending_data">The Service doesn't seem to receive any data from the agent. How do I troubleshoot this?</h3>
+<p>
+  Run <code>heroku logs</code> and check any logs that begin with "passenger-status".
+</p>

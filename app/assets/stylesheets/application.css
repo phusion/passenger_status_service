@@ -157,3 +157,8 @@ figure img {
 .highlight-overflow-pre {
   overflow: pre;
 }
+
+/* Highlight anchor headers */
+h3:target {
+  background-color: #ffffe0;
+}
