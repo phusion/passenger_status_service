@@ -6,7 +6,7 @@ Welcome to the Passenger Status Service. This is a service provided by [Phusion]
 
 Passenger status reports are gathered by running a the `passenger-status` tool, which queries a Passenger instance running on the same machine. However, Heroku does not provide SSH access to the servers on which your app is running, so it is not possible to run the `passenger-status` tool to obtain a status report from Passenger. The `heroku console` command spawns a one-off dyno instead of granting you access to the running servers, so that doesn't work either.
 
-![https://raw.githubusercontent.com/phusion/passenger_status_service/master/app/assets/images/service_overview.png](Passenger Status Service overview)
+![Passenger Status Service overview](https://raw.githubusercontent.com/phusion/passenger_status_service/master/app/assets/images/service_overview.png)
 
 The Passenger Status Service solves this problem. It works as follows:
 
