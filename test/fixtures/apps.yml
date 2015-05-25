@@ -13,10 +13,6 @@
 #
 #  index_apps_on_api_token  (api_token) UNIQUE
 #
-# Foreign Keys
-#
-#  fk_apps_user_id  (user_id => users.id)
-#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

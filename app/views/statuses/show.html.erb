@@ -1,1 +1,9 @@
-<pre><%= @status.content %></pre>
+<% @title = "Status report for #{@app.name}: #{@status.hostname}" %>
+<div class="page-header page-header-integrated">
+  <h1>Status reports for <%= @status.hostname %></h1>
+  <div class="back">
+    <%= link_to "&laquo; Back to #{h @app.name}".html_safe, @app %>
+  </div>
+</div>
+
+<%= render partial: "status", locals: { status: @status } %>

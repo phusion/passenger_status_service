@@ -6,5 +6,7 @@ class CreateStatuses < ActiveRecord::Migration
       t.text :content, null: false
       t.timestamps null: false
     end
+
+    add_index :statuses, [:app_id, :hostname, :updated_at], name: "statuses_index_on_3columns"
   end
 end

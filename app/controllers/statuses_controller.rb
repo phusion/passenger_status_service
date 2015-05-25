@@ -1,47 +1,23 @@
 class StatusesController < ApplicationController
-  before_action :authenticate_user!
+  before_filter :authenticate_user!, except: [:create]
   before_filter :find_app
+  before_filter :authenticate_api_token!, only: [:create]
   before_filter :find_status, only: [:edit, :show, :update, :destroy]
 
   def index
-    @statuses = @app.statuses
+    @grouped_statuses = @app.statuses.group_by_hostname_and_time(@app.id)
   end
 
   def create
-    status = Status.new_from_params(params)
-    if !status.accept_tos?
-      render json: {
-        status: "error",
-        message: "You must accept the terms of service"
-      }
-    elsif status.save
-      render json: { status: "ok" }
-    else
+    status = @app.create_status_report_from_api_params(params)
+    if status.new_record?
       render json: {
         status: "error",
         message: "Invalid parameters:\n" +
           status.errors.full_messages.join("\n")
       }
-    end
-  end
-
-  def show
-    authenticate_or_request_with_http_basic do |username, password|
-      if username != "user"
-        render_400
-        return
-      end
-
-      @status = Status.find_by_params(params)
-      if @status
-        if @status.authenticate(password)
-          render
-        else
-          render_401
-        end
-      else
-        render_404
-      end
+    else
+      render json: { status: "ok" }
     end
   end
 
@@ -54,9 +30,15 @@ private
   end
 
   def find_status
-    @status = @app.statuses.find(params[:app_id])
+    @status = @app.statuses.find(params[:id])
     if @status.nil?
       render action: 'not_found', status: 404
+    end
+  end
+
+  def authenticate_api_token!
+    authenticated = authenticate_or_request_with_http_basic do |username, password|
+      username == "api" && ActiveSupport::SecurityUtils.secure_compare(password, @app.api_token)
     end
   end
 end

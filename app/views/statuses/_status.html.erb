@@ -1,0 +1,20 @@
+<% if local_assigns.fetch(:header, true) %>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Host name</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= status.hostname %></td>
+          <td><%= status.updated_at %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<pre class="highlight highlight-overflow-pre"><%= status.content %></pre>

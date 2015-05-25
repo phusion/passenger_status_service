@@ -1,9 +1,9 @@
 class AppsController < ApplicationController
   before_action :authenticate_user!
-  before_filter :find_app, only: [:edit, :show, :update, :destroy]
+  before_filter :find_app, only: [:edit, :show, :setup, :wait, :update, :destroy]
 
   def index
-    @apps = current_user.apps
+    @apps = current_user.apps.order(:name)
   end
 
   def new
@@ -11,7 +11,8 @@ class AppsController < ApplicationController
   end
 
   def create
-    if @app = current_user.apps.create(filtered_app_params)
+    @app = current_user.apps.new(filtered_app_params)
+    if @app.save
       redirect_to @app
     else
       render action: "new"
@@ -20,6 +21,14 @@ class AppsController < ApplicationController
 
   def show
     redirect_to app_statuses_path(@app)
+  end
+
+  def wait
+    if @app.statuses.any?
+      redirect_to @app
+    else
+      render
+    end
   end
 
   def update
@@ -44,6 +53,6 @@ private
   end
 
   def filtered_app_params
-    params.require(:app).permit(:name, :accept_tos)
+    params.require(:app).permit(:name, :terms_of_service)
   end
 end

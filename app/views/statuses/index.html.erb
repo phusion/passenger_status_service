@@ -1,4 +1,4 @@
-<% @title = "Status reports for #{@app}" %>
+<% @title = "Status reports for #{@app.name}" %>
 <div class="page-header page-header-integrated">
   <h1>Status reports for <%= @app.name %></h1>
   <div class="back">
@@ -6,8 +6,8 @@
   </div>
 </div>
 
-<% if @statuses.empty? %>
+<% if @grouped_statuses.empty? %>
   <%= render partial: "intro" %>
 <% else %>
-  <%= render partial: "statuses", locals: { statuses: @statuses } %>
+  <%= render partial: "grouped_statuses", locals: { grouped_statuses: @grouped_statuses } %>
 <% end %>

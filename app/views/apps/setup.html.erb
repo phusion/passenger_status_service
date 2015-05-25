@@ -1,0 +1,39 @@
+<% @title = "Setup agent: #{@app.name}" %>
+<div class="page-header page-header-integrated">
+  <h1>Setup agent: <%= @app.name %></h1>
+  <div class="back">
+    <%= link_to "&laquo; Back to #{h @app.name}".html_safe, @app %>
+  </div>
+</div>
+
+<h4>Step 1: download &amp; import agent into your app</h4>
+<p>
+  The <a href="https://github.com/phusion/passenger_status_service_agent/">Passenger Status Service Agent</a> is a small program that periodically sends data to the Passenger Status Service. Please download it and import it into your app.
+</p>
+<pre class="highlight"><span class="prompt">$ </span>cd /path-to-your-app
+<span class="prompt">$ </span>curl --fail -sSLo passenger-status-service-agent <span class="str">https://raw.githubusercontent.com/phusion/passenger_status_service_agent/master/passenger-status-service-agent</span>
+<span class="prompt">$ </span>chmod +x passenger-status-service-agent
+<span class="prompt">$ </span>git add passenger-status-service-agent</pre>
+
+<h4>Step 2: activate agent in Procfile</h4>
+<p>
+  Add the following entry to your Procfile:
+</p>
+<pre class="highlight">passenger-status: if test "$DYNO" != ""; then exec ./passenger-status-service-agent; else sleep 999; fi</pre>
+
+<h4>Step 3: set configuration</h4>
+<p>
+  Set the necessary Heroku configuration variables:
+</p>
+<pre class="highlight"><span class="prompt">$ </span>unset HISTFILE
+<span class="prompt">$ </span>heroku config:set STATUS_SERVICE_URL=<span class="str"><%= app_statuses_url(@app) %></span>
+<span class="prompt">$ </span>heroku config:set STATUS_SERVICE_API_TOKEN=<span class="str"><%= @app.api_token %></span></pre>
+
+<h4>Step 4: commit &amp; deploy</h4>
+<pre class="highlight"><span class="prompt">$ </span>git commit -a -m "Install Passenger Status Service agent"
+<span class="prompt">$ </span>git push heroku master</pre>
+
+<p>When you are done...</p>
+<p>
+  <%= link_to "Continue &raquo;".html_safe, wait_app_path(@app), class: "btn btn-primary" %>
+</p>

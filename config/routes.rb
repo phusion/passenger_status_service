@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :apps do
     member do
       get 'setup'
+      get 'wait'
     end
 
     resources :statuses

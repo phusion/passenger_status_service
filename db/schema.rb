@@ -42,5 +42,6 @@ ActiveRecord::Schema.define(version: 20150525083129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+  add_index "statuses", ["app_id", "hostname", "updated_at"], name: "statuses_index_on_3columns"
 
 end

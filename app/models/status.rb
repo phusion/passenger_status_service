@@ -9,35 +9,33 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Foreign Keys
+# Indexes
 #
-#  fk_statuses_app_id  (app_id => apps.id)
+#  statuses_index_on_3columns  (app_id,hostname,updated_at)
 #
 
 class Status < ActiveRecord::Base
   belongs_to :app, inverse_of: 'statuses'
 
-  validates :namespace, :hostname, :content, presence: true
+  scope :group_by_hostname_and_time, lambda { |app_id|
+    joins(%Q{
+      INNER JOIN (
+        SELECT MAX(updated_at) AS max_updated_at
+        FROM statuses
+        WHERE statuses.app_id = #{app_id.to_i}
+        GROUP BY hostname
+      ) statuses2
+      ON statuses.updated_at = statuses2.max_updated_at
+    }).group(:hostname).order(:hostname)
+  }
 
-  def self.new_from_params(params)
+  validates :hostname, :content, presence: true
+
+  def self.new_from_api_params(params)
+    params = params.permit(:hostname, :content)
     status = new
-    status.accept_tos = params[:i_accept_the_terms_of_service] == 'true'
-    status.namespace = params[:namespace].downcase
     status.hostname = params[:hostname].downcase
-    status.password = params[:password].downcase
-    status.password_confirmation = params[:password].downcase
     status.content  = params[:content]
     status
-  end
-
-  def self.find_by_params(params)
-    find_by(
-      namespace: params[:namespace].downcase,
-      hostname: params[:hostname].downcase
-    )
-  end
-
-  def accept_tos?
-    !!@accept_tos
   end
 end

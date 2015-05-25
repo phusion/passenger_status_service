@@ -1,0 +1,4 @@
+<% grouped_statuses.each do |grouped_status| %>
+  <h3><%= grouped_status.hostname %></h3>
+  <%= render partial: "status", locals: { status: grouped_status, header: false } %>
+<% end %>

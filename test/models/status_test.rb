@@ -9,9 +9,9 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Foreign Keys
+# Indexes
 #
-#  fk_statuses_app_id  (app_id => apps.id)
+#  statuses_index_on_3columns  (app_id,hostname,updated_at)
 #
 
 require 'test_helper'

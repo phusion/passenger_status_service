@@ -106,7 +106,7 @@ body, html {
 figure {
   display: block;
   text-align: center;
-  margin: 1em;
+  margin: 2em;
 }
 
 figure img {
@@ -121,4 +121,27 @@ figure img {
 
 .table-resource-list .name {
   width: 100%;
+}
+
+.highlight {
+  background: #000033;
+  color: #f5f5f5;
+  font-size: 12px;
+}
+
+.highlight .prompt {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  color: #aaa;
+}
+
+.highlight .str {
+  color: #B9D1F5;
+}
+
+.highlight-overflow-pre {
+  overflow: pre;
 }
