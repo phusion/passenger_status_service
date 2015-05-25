@@ -10,6 +10,101 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require "bootstrap.min.css"
  *= require_tree .
  *= require_self
  */
+
+/****** Overall site layout and styling ******/
+
+body, html {
+  background: #f0f0f0;
+  font-size: 16px;
+}
+
+#site_container {
+  max-width: 800px;
+}
+
+#site_header nav {
+  border-radius: 0 0 12px 12px;
+}
+
+#main_content {
+  border-radius: 25px;
+  padding: 3em;
+  margin-bottom: 3em;
+  background: white;
+}
+
+#main_content .first-page-element,
+#main_content > h1:first-child,
+#main_content > h2:first-child {
+  margin-top: 0;
+}
+
+#site_footer {
+  padding: 0 3em 2em 3em;
+  font-size: small;
+}
+
+
+/****** Integration with Rails classes ******/
+
+#error_explanation,
+.field_with_errors {
+  color: #cc0000;
+}
+
+.field_with_errors {
+  display: inline;
+}
+
+
+/****** Components ******/
+
+.container .jumbotron.jumbotron-integrated {
+  margin-top: -3em;
+  margin-left: -3em;
+  margin-right: -3em;
+  border-radius: 12px 12px 0 0;
+}
+
+.jumbotron-inverse {
+  background: #333;
+  color: #f5f5f5;
+}
+
+.page-header.page-header-integrated {
+  margin-top: -3em;
+  margin-left: -3em;
+  margin-right: -3em;
+  border-radius: 12px 12px 0 0;
+  padding: 1em 1.5em;
+  background: #666;
+  color: #fafafa;
+}
+
+.page-header-integrated h1 {
+  font-size: 30px;
+  margin: 0;
+}
+
+.page-header-integrated a {
+  color: #fafafa;
+}
+
+.page-header-integrated .back {
+  font-size: small;
+}
+
+.image-align-right {
+  float: right;
+  margin: 0 0 2em 2em;
+}
+
+.intro-container {
+  max-width: 50%;
+  text-align: center;
+  margin: 1em auto 1em auto;
+}

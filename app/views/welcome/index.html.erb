@@ -1,0 +1,33 @@
+<div class="jumbotron jumbotron-integrated jumbotron-inverse">
+  <h1>Passenger status reports for Heroku</h1>
+  <p>A service provided by Phusion</p>
+  <p>
+    <a class="btn btn-primary btn-lg" href="#about" role="button">Learn more</a>
+  </p>
+</div>
+
+<p>
+  <%= image_tag "service_overview.png", width: 600, class: "image-align-right", style: "max-width: 50%" %>
+</p>
+
+<h2 id="about">About</h2>
+<p>
+  Welcome to the Passenger Status Service for Heroku. This is a service provided by <a href="http://www.phusion.nl/">Phusion</a> for the <a href="https://www.phusionpassenger.com/">Passenger application server</a>. This service makes Passenger status reports (the <code>passenger-status</code> tool) work on Heroku.
+</p>
+
+<h2>The problem with Passenger status reports on Heroku</h2>
+<p>
+  Passenger status reports are gathered by running a the <code>passenger-status</code> tool, which queries a Passenger instance running on the same machine. However, Heroku does not provide SSH access to the servers on which your app is running, so it is not possible to run the <code>passenger-status</code> tool to obtain a status report from Passenger. The <code>heroku console</code> command spawns a one-off dyno instead of granting you access to the running servers, so that doesn't work either.
+</p>
+<p>
+  The Passenger Status Service solves this problem. It works as follows:
+</p>
+<ul>
+  <li>You add a reporting command to your Procfile. This reporting command gathers a status report from the local Heroku server and posts it to the Passenger Status Service.</li>
+  <li>You view the status reports through the Passenger Status Service.</li>
+</ul>
+
+<h2>Get started now</h2>
+<p>
+  To get started, <%= link_to "sign up", new_user_registration_path %> for an account and follow the setup instructions that come after.
+</p>

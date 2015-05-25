@@ -1,0 +1,24 @@
+<% @title = "New app" %>
+<div class="page-header page-header-integrated">
+  <h1>New app</h1>
+  <div class="back">
+    <%= link_to "&laquo; Back to My Apps".html_safe %>
+  </div>
+</div>
+
+<%= form_for(@app) do |f| %>
+  <div class="form-group">
+    <%= f.label_for :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :accept_tos %>
+      I accept the <%= link_to "terms and conditions" %>
+    </label>
+  </div>
+  <div>
+    <small>Seriously, you should read it. It's important and very short.</small>
+  </div>
+<% end %>

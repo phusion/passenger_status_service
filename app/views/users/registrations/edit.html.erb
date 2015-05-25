@@ -1,0 +1,46 @@
+<% @title = "Your account" %>
+<h2>Your account</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="form-group field">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="form-group field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+    <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <p class="actions">
+    <%= f.submit "Update", class: "btn btn-primary" %>
+  </p>
+<% end %>
+
+<div class="panel panel-danger" style="margin: 4em 0 2em 0">
+  <div class="panel-heading">Danger zone</div>
+  <div class="panel-body">
+    <p>
+      Want to delete your account and delete all your data?
+    </p>
+    <p><%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure? All your data will be deleted. THERE IS NO TURNING BACK." }, method: :delete, class: "btn btn-danger" %></p>
+  </div>
+</div>
+
+<p><%= link_to "&laquo; Back".html_safe, :back %></p>

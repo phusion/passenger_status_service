@@ -1,14 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PassengerStatusService</title>
+  <title><%= "#{@title} - " if @title %>Passenger Status Service</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <div id="site_container" class="container">
+    <header id="site_header">
+      <%= render partial: 'layouts/navbar' %>
+    </header>
+
+    <section id="main_content">
+      <%= yield %>
+    </section>
+
+    <footer id="site_footer">
+      <p>
+        Copyright &copy; <%= Date.today.year %> <a href="http://www.phusion.nl/">Phusion</a>, all rights reserved.
+      <p>
+      <p>
+        <%= link_to "Back to Passenger website", "https://www.phusionpassenger.com" %> |
+        <%= link_to "FAQ", controller: "/welcome", action: "faq" %> |
+        <%= link_to "Terms of service", controller: "/welcome", action: "tos" %> |
+        <%= link_to "Contact", "http://www.phusion.nl/contact" %>
+      </p>
+    </footer>
+  </div>
 
 </body>
 </html>

@@ -1,0 +1,10 @@
+<% @title = "My Apps" %>
+<div class="page-header page-header-integrated">
+  <h1>My apps</h1>
+</div>
+
+<% if @apps.empty? %>
+  <%= render partial: "intro" %>
+<% else %>
+  <%= render partial: "apps", locals: { apps: @apps } %>
+<% end %>
