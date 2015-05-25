@@ -1,4 +1,6 @@
+<p><em>The most recent status reports for each host is shown here.</em></p>
+
 <% grouped_statuses.each do |grouped_status| %>
-  <h3><%= grouped_status.hostname %></h3>
+  <h3><%= link_to grouped_status.hostname, [grouped_status.app, grouped_status] %></h3>
   <%= render partial: "status", locals: { status: grouped_status, header: false } %>
 <% end %>

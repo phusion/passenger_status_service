@@ -81,8 +81,10 @@ body, html {
   margin-right: -3em;
   border-radius: 12px 12px 0 0;
   padding: 1em 1.5em;
+  padding-right: 6em; /* Ensure that wrapped text don't overlap with the action button. */
   background: #666;
   color: #fafafa;
+  position: relative;
 }
 
 .page-header-integrated h1 {
@@ -96,6 +98,12 @@ body, html {
 
 .page-header-integrated .back {
   font-size: small;
+}
+
+.page-header-integrated .actions {
+  position: absolute;
+  right: 1.5em;
+  top: 1em;
 }
 
 .img-align-right {
@@ -117,6 +125,10 @@ figure img {
   max-width: 50%;
   text-align: center;
   margin: 1em auto 1em auto;
+}
+
+.table.table-resource-list td {
+  vertical-align: middle;
 }
 
 .table-resource-list .name {

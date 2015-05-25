@@ -1,8 +1,8 @@
-<% @title = "Edit app" %>
+<% @title = "App settings: #{@app.name}" %>
 <div class="page-header page-header-integrated">
-  <h1>Edit app</h1>
+  <h1>App settings: <%= @app.name %></h1>
   <div class="back">
-    <%= link_to "&laquo; Back to My Apps".html_safe, apps_path %>
+    <%= link_to "&laquo; Back to #{@app.name}".html_safe, @app %>
   </div>
 </div>
 

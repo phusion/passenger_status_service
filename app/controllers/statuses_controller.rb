@@ -1,7 +1,8 @@
 class StatusesController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create]
   before_filter :authenticate_user!, except: [:create]
-  before_filter :find_app
-  before_filter :authenticate_api_token!, only: [:create]
+  before_filter :authenticate_api_token_and_find_app!, only: [:create]
+  before_filter :find_app, except: [:create]
   before_filter :find_status, only: [:edit, :show, :update, :destroy]
 
   def index
@@ -36,9 +37,18 @@ private
     end
   end
 
-  def authenticate_api_token!
+  def authenticate_api_token_and_find_app!
     authenticated = authenticate_or_request_with_http_basic do |username, password|
-      username == "api" && ActiveSupport::SecurityUtils.secure_compare(password, @app.api_token)
+      if username == "api"
+        @app = App.find_by(api_token: password)
+        if @app
+          true
+        else
+          false
+        end
+      else
+        false
+      end
     end
   end
 end

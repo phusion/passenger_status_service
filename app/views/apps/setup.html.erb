@@ -26,7 +26,7 @@
   Set the necessary Heroku configuration variables:
 </p>
 <pre class="highlight"><span class="prompt">$ </span>unset HISTFILE
-<span class="prompt">$ </span>heroku config:set STATUS_SERVICE_URL=<span class="str"><%= app_statuses_url(@app) %></span>
+<span class="prompt">$ </span>heroku config:set STATUS_SERVICE_URL=<span class="str"><%= app_statuses_url(@app, format: "json") %></span>
 <span class="prompt">$ </span>heroku config:set STATUS_SERVICE_API_TOKEN=<span class="str"><%= @app.api_token %></span></pre>
 
 <h4>Step 4: commit &amp; deploy</h4>

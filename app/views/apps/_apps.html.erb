@@ -3,9 +3,15 @@
   <tr>
     <td class="name"><%= link_to app.name, app %></td>
     <td class="actions">
-      <%= link_to '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'.html_safe,
-            app, method: "delete", class: "btn btn-xs btn-danger",
-            data: { confirm: "Are you sure? All data will be destroyed. THERE IS NO TURNING BACK!" } %>
+      <div class="dropdown">
+        <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="page-header-actions" data-toggle="dropdown" aria-expanded="true">
+          <span class="glyphicon glyphicon-cog"></span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="page-header-actions">
+          <%= render partial: "apps/menu", locals: { app: app } %>
+        </ul>
+      </div>
     </td>
   </tr>
 <% end %>

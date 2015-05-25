@@ -1,0 +1,3 @@
+<li role="presentation"><%= link_to "Agent setup instructions", setup_app_path(app), role: "menuitem", tabindex: -1 %></li>
+<li role="presentation"><%= link_to "Edit settings", edit_app_path(app), role: "menuitem", tabindex: -1 %></li>
+<li role="presentation"><%= link_to "Delete app and its data", app, method: "delete", data: { confirm: "Are you sure? THERE IS NO WAY BACK!" }, role: "menuitem", tabindex: -1 %></li>

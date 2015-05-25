@@ -30,12 +30,4 @@ class Status < ActiveRecord::Base
   }
 
   validates :hostname, :content, presence: true
-
-  def self.new_from_api_params(params)
-    params = params.permit(:hostname, :content)
-    status = new
-    status.hostname = params[:hostname].downcase
-    status.content  = params[:content]
-    status
-  end
 end

@@ -33,7 +33,7 @@ class App < ActiveRecord::Base
 
   def create_status_report_from_api_params(params)
     statuses.create(
-      hostname: params[:hostname].downcase,
+      hostname: params[:hostname].try(:downcase),
       content: params[:content]
     )
   end
