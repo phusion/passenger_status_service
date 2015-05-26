@@ -13,7 +13,11 @@ class StatusesController < ApplicationController
   def create
     status = @app.new_status_report_from_api_params(params)
     authorize! :create, status
-    if status.save
+    if status.valid?
+      Status.transaction do
+        @app.statuses.where(["updated_at < ?", RETENTION_TIME.ago]).delete_all
+        status.save(validate: false)
+      end
       render json: { status: "ok" }
     else
       render json: {
