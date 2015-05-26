@@ -40,10 +40,12 @@ This app requires PostgreSQL.
  5. Open a shell as `passenger_status_service`. If you are using RVM:
 
         $ rvmsudo -u passenger_status_service -H bash
+        $ export RAILS_ENV=production
 
     If you are not using RVM:
 
         $ sudo -u passenger_status_service -H bash
+        $ export RAILS_ENV=production
 
  6. Create a database, edit database configuration:
 

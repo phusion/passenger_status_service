@@ -80,7 +80,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-  root_uri = URI.parse(ENV["ROOT_URL"] || abort("Please set the ROOT_URL environment variable."))
+  root_uri = URI.parse(ENV["ROOT_URL"] || "https://www.please-change-me-by-setting-ROOT_URL-env-var.com")
   config.action_mailer.default_url_options = {
     protocol: root_uri.scheme,
     host: root_uri.host,
