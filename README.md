@@ -56,16 +56,37 @@ This app requires PostgreSQL.
 
  8. Run database migrations, generate assets:
 
-        $ rake db:migrate assets:precompile
+        $ bundle exec rake db:migrate assets:precompile
 
- 9. Add Nginx virtual host.
+ 9. Create an admin user:
+
+        $ bundle exec rake admin:create
+        Email: ...
+        Password: ...
+        Confirm password: ...
+        Admin user created.
+
+ 10. Generate a secret key:
+
+        $ bundle rake secret
+
+     Take note of the output. You need it in the next step.
+
+ 11. Add Nginx virtual host. Be sure to substitute the `passenger_env_var` values with appropriate values.
 
         server {
             listen 443;
-            server_name ...;
+            server_name www.yourhost.com;
             ssl_certificate ...;
             ssl_certificate_key ...;
             ssl on;
             root /var/www/passenger_status_service/public;
             passenger_enabled on;
+
+            # Fill in an appropriate value for email 'From' fields.
+            passenger_env_var MAILER_SENDER yourapp@yourdomain.com;
+            # Fill in the root URL of the app.
+            passenger_env_var ROOT_URL https://www.yourhost.com;
+            # Fill in value of secret key you generated in step 10.
+            passenger_env_var SECRET_KEY_BASE ...;
         }

@@ -8,6 +8,7 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
+#  admin                  :boolean          default(FALSE), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -25,4 +26,12 @@ class User < ActiveRecord::Base
          :timeoutable
 
   has_many :apps, inverse_of: 'user'
+
+  def find_app(app_id)
+    if admin?
+      App.find(app_id)
+    else
+      apps.find(app_id)
+    end
+  end
 end

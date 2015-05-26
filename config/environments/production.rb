@@ -1,3 +1,5 @@
+require 'uri'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -76,4 +78,12 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+
+  root_uri = URI.parse(ENV["ROOT_URL"] || abort("Please set the ROOT_URL environment variable."))
+  config.action_mailer.default_url_options = {
+    protocol: root_uri.scheme,
+    host: root_uri.host,
+    port: root_uri.port
+  }
 end

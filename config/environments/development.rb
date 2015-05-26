@@ -1,3 +1,5 @@
+require 'uri'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -38,4 +40,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+
+  root_uri = URI.parse(ENV["ROOT_URL"] || "http://127.0.0.1:3000")
+  config.action_mailer.default_url_options = {
+    protocol: root_uri.scheme,
+    host: root_uri.host,
+    port: root_uri.port
+  }
 end

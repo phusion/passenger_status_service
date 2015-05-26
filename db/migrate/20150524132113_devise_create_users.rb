@@ -12,6 +12,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Rememberable
       t.datetime :remember_created_at
 
+      t.boolean :admin, null: false, default: false
       t.timestamps null: false
     end
 

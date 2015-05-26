@@ -30,4 +30,8 @@ class Status < ActiveRecord::Base
   }
 
   validates :hostname, :content, presence: true
+
+  def user_id
+    app.user_id
+  end
 end

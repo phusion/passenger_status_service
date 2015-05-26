@@ -6,33 +6,42 @@ class StatusesController < ApplicationController
   before_filter :find_status, only: [:edit, :show, :update, :destroy]
 
   def index
+    authorize! :index, Status
     @grouped_statuses = @app.statuses.group_by_hostname_and_time(@app.id)
   end
 
   def create
-    status = @app.create_status_report_from_api_params(params)
-    if status.new_record?
+    status = @app.new_status_report_from_api_params(params)
+    authorize! :create, status
+    if status.save
+      render json: { status: "ok" }
+    else
       render json: {
         status: "error",
         message: "Invalid parameters:\n" +
           status.errors.full_messages.join("\n")
       }
-    else
-      render json: { status: "ok" }
     end
+  end
+
+  def show
+    authorize! :show, @status
   end
 
 private
   def find_app
-    @app = current_user.apps.find(params[:app_id])
-    if @app.nil?
-      render action: 'apps/not_found', status: 404
+    begin
+      @app = App.find(params[:app_id])
+      authorize! :read, @app
+    rescue ActiveRecord::RecordNotFound
+      render template: 'apps/not_found', status: 404
     end
   end
 
   def find_status
-    @status = @app.statuses.find(params[:id])
-    if @status.nil?
+    begin
+      @status = @app.statuses.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
       render action: 'not_found', status: 404
     end
   end
@@ -42,6 +51,8 @@ private
       if username == "api"
         @app = App.find_by(api_token: password)
         if @app
+          @current_user = @app.user
+          authorize! :read, @app
           true
         else
           false

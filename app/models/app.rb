@@ -23,7 +23,7 @@ class App < ActiveRecord::Base
   attr_accessor :terms_of_service
 
   validates :name, :api_token, presence: true
-  validates :terms_of_service, presence: true, acceptance: true #, if: :new_record?
+  validates :terms_of_service, presence: true, acceptance: true, if: :new_record?
 
   def self.generate_api_token
     time   = Time.now.to_i.to_s(36).ljust(8, "-")
@@ -31,8 +31,8 @@ class App < ActiveRecord::Base
     "#{time}#{random}"
   end
 
-  def create_status_report_from_api_params(params)
-    statuses.create(
+  def new_status_report_from_api_params(params)
+    statuses.new(
       hostname: params[:hostname].try(:downcase),
       content: params[:content]
     )
