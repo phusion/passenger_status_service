@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns":
+			[
+				"tmp",
+				"log",
+				"db/*.sqlite3"
+			]
+		}
+	]
+}
