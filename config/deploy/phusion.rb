@@ -7,3 +7,4 @@ set :default_env, {
   'ROOT_URL' => 'https://status-service.phusionpassenger.com',
   'MAILER_SENDER' => 'admin@phusionpassenger.com'
 }
+set :passenger_environment_variables, { :path => '/opt/production/passenger-enterprise/bin:$PATH' }

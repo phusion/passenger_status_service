@@ -35,6 +35,7 @@ gem 'cancancan'
 group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
   gem 'quiet_assets'
   gem 'annotate', '~> 2.6.6'
 end

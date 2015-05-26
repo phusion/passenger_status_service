@@ -19,7 +19,7 @@
 <p>
   Add the following entry to your Procfile:
 </p>
-<pre class="highlight">passenger-status: if test "$DYNO" != ""; then exec ./passenger-status-service-agent; else sleep 999; fi</pre>
+<pre class="highlight">passenger_status: if test "$DYNO" != ""; then exec ./passenger-status-service-agent; else sleep 999; fi</pre>
 
 <h4>Step 3: set configuration</h4>
 <p>
