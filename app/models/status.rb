@@ -28,9 +28,9 @@ class Status < ActiveRecord::Base
       ON statuses.updated_at = statuses2.max_updated_at
     }).order(:hostname)
     if Status.connection.adapter_name == "PostgreSQL"
-      result.select("distinct on (hostname), statuses.*")
+      result.select("DISTINCT ON (hostname) statuses.*")
     else
-      result
+      result.group(:hostname)
     end
   }
 
