@@ -32,9 +32,14 @@ class App < ActiveRecord::Base
   end
 
   def new_status_report_from_api_params(params)
+    if params[:content].respond_to?(:read)
+      content = params[:content].read
+    else
+      content = params[:content]
+    end
     statuses.new(
       hostname: params[:hostname].try(:downcase),
-      content: params[:content]
+      content: content
     )
   end
 end

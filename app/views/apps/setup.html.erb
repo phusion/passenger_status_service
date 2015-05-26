@@ -17,9 +17,9 @@
 
 <h4>Step 2: activate agent in Procfile</h4>
 <p>
-  Add the following entry to your Procfile:
+  Open your Procfile. Prepend the string <code>./passenger-status-service-agent &amp; </code> to the <code>web</code> section. For example:
 </p>
-<pre class="highlight">passenger_status: if test "$DYNO" != ""; then exec ./passenger-status-service-agent; else sleep 999; fi</pre>
+<pre class="highlight">web: ./passenger-status-service-agent &amp; bundle exec passenger start -p $PORT</pre>
 
 <h4>Step 3: set configuration</h4>
 <p>

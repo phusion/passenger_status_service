@@ -18,7 +18,7 @@ class Status < ActiveRecord::Base
   belongs_to :app, inverse_of: 'statuses'
 
   scope :group_by_hostname_and_time, lambda { |app_id|
-    joins(%Q{
+    result = joins(%Q{
       INNER JOIN (
         SELECT MAX(updated_at) AS max_updated_at
         FROM statuses
@@ -26,7 +26,12 @@ class Status < ActiveRecord::Base
         GROUP BY hostname
       ) statuses2
       ON statuses.updated_at = statuses2.max_updated_at
-    }).group(:hostname).order(:hostname)
+    }).order(:hostname)
+    if Status.connection.adapter_name == "PostgreSQL"
+      result.select("distinct on (hostname), statuses.*")
+    else
+      result
+    end
   }
 
   validates :hostname, :content, presence: true
