@@ -8,7 +8,7 @@ class AppsController < ApplicationController
   end
 
   def new
-    @app = App.new
+    @app = current_user.apps.new
     authorize! :new, @app
   end
 
