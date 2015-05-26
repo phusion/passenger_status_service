@@ -8,3 +8,5 @@ set :default_env, {
   'MAILER_SENDER' => 'admin@phusionpassenger.com'
 }
 set :passenger_environment_variables, { :path => '/opt/production/passenger-enterprise/bin:$PATH' }
+set :passenger_restart_command, '/opt/production/passenger-enterprise/bin/passenger-config restart-app'
+set :passenger_restart_with_sudo, true
