@@ -36,6 +36,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    airbrake (4.2.0)
+      builder
+      multi_json
     annotate (2.6.10)
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
@@ -200,6 +203,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   annotate (~> 2.6.6)
   byebug
   cancancan

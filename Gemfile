@@ -53,4 +53,5 @@ end
 
 group :production do
   gem 'pg', require: nil
+  gem 'airbrake'
 end
