@@ -10,7 +10,6 @@ private
   end
 
   def allow_http_private_caching
-    @public_caching = true
     headers["Cache-Control"] = "private, max-age=2592000" # 1 month
     yield
   end
