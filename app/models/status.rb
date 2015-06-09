@@ -26,11 +26,14 @@ class Status < ActiveRecord::Base
         GROUP BY hostname
       ) statuses2
       ON statuses.updated_at = statuses2.max_updated_at
-    }).order("updated_at DESC")
+    }).order(:hostname)
     if Status.connection.adapter_name == "PostgreSQL"
-      result.select("DISTINCT ON (hostname) statuses.*")
+      result = result.select("DISTINCT ON (hostname) statuses.*")
     else
-      result.group(:hostname)
+      result = result.group(:hostname)
+    end
+    result = result.to_a.sort do |a, b|
+      b.updated_at <=> a.updated_at
     end
   }
 

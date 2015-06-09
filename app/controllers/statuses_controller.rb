@@ -7,7 +7,7 @@ class StatusesController < ApplicationController
 
   def index
     authorize! :index, Status
-    @grouped_statuses = @app.statuses.group_by_hostname_and_time(@app.id).to_a
+    @grouped_statuses = @app.statuses.group_by_hostname_and_time(@app.id)
   end
 
   def create
