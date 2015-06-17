@@ -9,4 +9,4 @@ set :default_env, {
 }
 set :passenger_environment_variables, { :path => '/opt/production/passenger-enterprise/bin:$PATH' }
 set :passenger_restart_command, '/opt/production/passenger-enterprise/bin/passenger-config restart-app'
-set :passenger_restart_with_sudo, true
+set :passenger_restart_with_sudo, false
