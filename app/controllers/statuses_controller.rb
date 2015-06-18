@@ -15,7 +15,7 @@ class StatusesController < ApplicationController
     authorize! :create, status
     if status.valid?
       Status.transaction do
-        @app.statuses.where(["updated_at < ?", RETENTION_TIME.ago]).delete_all
+        @app.clean_old_status_reports_from_api_params(params)
         status.save(validate: false)
       end
       render json: { status: "ok" }

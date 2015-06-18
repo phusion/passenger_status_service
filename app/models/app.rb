@@ -42,4 +42,9 @@ class App < ActiveRecord::Base
       content: content
     )
   end
+
+  def clean_old_status_reports_from_api_params(params)
+    hostname = params[:hostname].downcase
+    statuses.where(["hostname = ? AND updated_at < ?", hostname, RETENTION_TIME.ago]).delete_all
+  end
 end
