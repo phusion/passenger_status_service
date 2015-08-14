@@ -37,6 +37,7 @@ class Ability
     else
       can :manage, User, id: user.id
       can :manage, App, user_id: user.id
+      can :manage, Host, user_id: user.id
       can :manage, Status, user_id: user.id
     end
   end

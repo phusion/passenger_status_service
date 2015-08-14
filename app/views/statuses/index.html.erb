@@ -18,8 +18,8 @@
   </div>
 </div>
 
-<% if @grouped_statuses.empty? %>
+<% if @hosts.empty? %>
   <%= render partial: "intro" %>
 <% else %>
-  <%= render partial: "grouped_statuses", locals: { grouped_statuses: @grouped_statuses } %>
+  <%= render partial: "hosts", locals: { hosts: @hosts } %>
 <% end %>

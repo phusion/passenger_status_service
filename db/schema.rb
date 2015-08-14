@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525083129) do
+ActiveRecord::Schema.define(version: 20150814151125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,13 +38,20 @@ ActiveRecord::Schema.define(version: 20150525083129) do
   end
   add_index "apps", ["api_token"], name: "index_apps_on_api_token", unique: true, using: :btree
 
-  create_table "statuses", force: :cascade do |t|
-    t.integer  "app_id",     null: false, foreign_key: {references: "apps", name: "fk_statuses_app_id", on_update: :cascade, on_delete: :cascade}
+  create_table "hosts", force: :cascade do |t|
+    t.integer  "app_id",     null: false, foreign_key: {references: "apps", name: "fk_hosts_app_id", on_update: :cascade, on_delete: :cascade}
     t.string   "hostname",   null: false
-    t.text     "content",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  add_index "statuses", ["app_id", "hostname", "updated_at"], name: "statuses_index_on_3columns", using: :btree
+  add_index "hosts", ["app_id", "hostname"], name: "index_hosts_on_app_id_and_hostname", unique: true, using: :btree
+
+  create_table "statuses", force: :cascade do |t|
+    t.text     "content",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "host_id",    null: false, foreign_key: {references: "hosts", name: "fk_statuses_host_id", on_update: :cascade, on_delete: :cascade}
+  end
+  add_index "statuses", ["host_id", "updated_at"], name: "index_statuses_on_host_id_and_updated_at", using: :btree
 
 end

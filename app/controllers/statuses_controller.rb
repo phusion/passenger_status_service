@@ -7,24 +7,59 @@ class StatusesController < ApplicationController
 
   def index
     authorize! :index, Status
-    @grouped_statuses = @app.statuses.group_by_hostname_and_time(@app.id)
+    @hosts = @app.hosts.order('updated_at DESC,hostname').load
   end
 
   def create
-    status = @app.new_status_report_from_api_params(params)
-    authorize! :create, status
-    if status.valid?
-      Status.transaction do
-        @app.clean_old_status_reports_from_api_params(params)
-        status.save(validate: false)
+    [:hostname, :content].each do |key|
+      if params[key].blank?
+        render json: {
+          status: "error",
+          message: "Key '#{key}' required"
+        }
+        return
       end
-      render json: { status: "ok" }
-    else
-      render json: {
-        status: "error",
-        message: "Invalid parameters:\n" +
-          status.errors.full_messages.join("\n")
-      }
+    end
+
+    begin
+      Status.transaction do
+        host, host_found = @app.find_or_create_host_by_api_params(params)
+        if host_found
+          Rails.logger.info "Found host: #{params[:hostname]}"
+        else
+          Rails.logger.info "Registered new host: #{params[:hostname]}"
+        end
+        authorize! :create, host
+        if host.errors.any?
+          render json: {
+            status: "error",
+            message: "Invalid parameters for host object:\n" +
+              host.errors.full_messages.join("\n")
+          }
+          return
+        end
+
+        status = host.new_status_report_from_api_params(params)
+        authorize! :create, status
+        if status.valid?
+          status.save(validate: false)
+          if host_found
+            host.clean_old_status_reports
+            host.updated_at = Time.now
+            host.save!
+          end
+          render json: { status: "ok" }
+        else
+          render json: {
+            status: "error",
+            message: "Invalid parameters for status object:\n" +
+              status.errors.full_messages.join("\n")
+          }
+        end
+      end
+    rescue ActiveRecord::RecordNotUnique
+      Rails.logger.info "Duplicate record error. Retrying..."
+      retry
     end
   end
 

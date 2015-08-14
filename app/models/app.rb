@@ -16,7 +16,8 @@
 
 class App < ActiveRecord::Base
   belongs_to :user, inverse_of: 'apps'
-  has_many :statuses, inverse_of: 'app'
+  has_many :hosts, inverse_of: 'app'
+  has_many :statuses, through: 'hosts'
 
   default_value_for(:api_token) { App.generate_api_token }
 
@@ -31,20 +32,14 @@ class App < ActiveRecord::Base
     "#{time}#{random}"
   end
 
-  def new_status_report_from_api_params(params)
-    if params[:content].respond_to?(:read)
-      content = params[:content].read
-    else
-      content = params[:content]
-    end
-    statuses.new(
-      hostname: params[:hostname].try(:downcase),
-      content: content
-    )
-  end
-
-  def clean_old_status_reports_from_api_params(params)
+  def find_or_create_host_by_api_params(params)
     hostname = params[:hostname].downcase
-    statuses.where(["hostname = ? AND updated_at < ?", hostname, RETENTION_TIME.ago]).delete_all
+    if host = hosts.where(hostname: hostname).first
+      [host, true]
+    else
+      host = hosts.new(hostname: hostname)
+      host.save
+      [host, false]
+    end
   end
 end
