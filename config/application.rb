@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-RETENTION_TIME = 2.weeks
+RETENTION_TIME = 3.days
 
 module PassengerStatusService
   class Application < Rails::Application
