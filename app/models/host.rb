@@ -31,4 +31,8 @@ class Host < ActiveRecord::Base
   def clean_old_status_reports
     statuses.where(["updated_at < ?", RETENTION_TIME.ago]).delete_all
   end
+
+  def user_id
+    app.try(:user_id)
+  end
 end

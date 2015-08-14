@@ -23,7 +23,7 @@ class Status < ActiveRecord::Base
   end
 
   def user_id
-    app.try(:user_id)
+    host.try(:user_id)
   end
 
   def hostname
