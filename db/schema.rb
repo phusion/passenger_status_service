@@ -13,7 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150525083129) do
 
-  PRAGMA FOREIGN_KEYS = ON;
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  null: false
     t.string   "encrypted_password",     null: false
@@ -24,8 +26,8 @@ ActiveRecord::Schema.define(version: 20150525083129) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "apps", force: :cascade do |t|
     t.integer  "user_id",    null: false, foreign_key: {references: "users", name: "fk_apps_user_id", on_update: :cascade, on_delete: :cascade}
@@ -34,7 +36,7 @@ ActiveRecord::Schema.define(version: 20150525083129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  add_index "apps", ["api_token"], name: "index_apps_on_api_token", unique: true
+  add_index "apps", ["api_token"], name: "index_apps_on_api_token", unique: true, using: :btree
 
   create_table "statuses", force: :cascade do |t|
     t.integer  "app_id",     null: false, foreign_key: {references: "apps", name: "fk_statuses_app_id", on_update: :cascade, on_delete: :cascade}
@@ -43,6 +45,6 @@ ActiveRecord::Schema.define(version: 20150525083129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  add_index "statuses", ["app_id", "hostname", "updated_at"], name: "statuses_index_on_3columns"
+  add_index "statuses", ["app_id", "hostname", "updated_at"], name: "statuses_index_on_3columns", using: :btree
 
 end
