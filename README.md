@@ -34,7 +34,7 @@ This app requires PostgreSQL.
 
         $ sudo mkdir /var/www/passenger_status_service
         $ sudo chown passenger_status_service: /var/www/passenger_status_service
-        $ sudo -u passenger_status_service -H git clone git://github.com/phusion/passenger_status_service /var/www/passenger_status_service
+        $ sudo -u passenger_status_service -H git clone git://github.com/phusion/passenger_status_service.git /var/www/passenger_status_service
         $ cd /var/www/passenger_status_service
 
  5. Open a shell as `passenger_status_service`. If you are using RVM:
