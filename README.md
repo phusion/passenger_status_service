@@ -54,7 +54,7 @@ This app requires PostgreSQL.
 
  7. Install the gem bundle:
 
-        $ bundle install --without development test --production
+        $ bundle install --without development test --deployment
 
  8. Run database migrations, generate assets:
 
