@@ -20,6 +20,10 @@
   Open your Procfile. Prepend the string <code>./passenger-status-service-agent &amp; </code> to the <code>web</code> section. For example:
 </p>
 <pre class="highlight">web: ./passenger-status-service-agent &amp; bundle exec passenger start -p $PORT</pre>
+<p>
+  Then add your Procfile to git:
+</p>
+<pre class="highlight"><span class="prompt">$ </span>git add Procfile</pre>
 
 <h4>Step 3: set configuration</h4>
 <p>
