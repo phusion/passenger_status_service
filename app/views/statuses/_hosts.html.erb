@@ -1,7 +1,7 @@
 <p><em>The most recent status reports for each host is shown here.</em></p>
 
 <% hosts.each do |host| %>
-  <% if host.statuses.any? %>
+  <% if host.statuses.empty? %>
     <h3><%= host.hostname %></h3>
     <p>No data yet.</p>
   <% else %>
