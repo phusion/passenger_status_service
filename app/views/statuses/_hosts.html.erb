@@ -1,6 +1,11 @@
 <p><em>The most recent status reports for each host is shown here.</em></p>
 
 <% hosts.each do |host| %>
-  <h3><%= link_to host.hostname, [host.app, host.statuses.first] %></h3>
-  <%= render partial: "status", locals: { status: host.statuses.first, header: false } %>
+  <% if host.statuses.any? %>
+    <h3><%= host.hostname %></h3>
+    <p>No data yet.</p>
+  <% else %>
+    <h3><%= link_to host.hostname, [host.app, host.statuses.first] %></h3>
+    <%= render partial: "status", locals: { status: host.statuses.first, header: false } %>
+  <% end %>
 <% end %>
