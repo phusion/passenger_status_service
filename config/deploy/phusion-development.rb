@@ -1,4 +1,4 @@
-server "passenger_status_service@status-service.phusionpassenger.com", :roles => [:app, :web, :db]
+server "passenger_status_service@status-service.dev.phusionpassenger.com", :roles => [:app, :web, :db]
 
 set :rvm_ruby_version, '2.3.4'
 set :repo_url, 'git://github.com/phusion/passenger_status_service.git'
