@@ -13,12 +13,6 @@ The Passenger Status Service solves this problem. It works as follows:
  * You add a reporting command to your Procfile. This reporting command gathers a status report from the local Heroku server and posts it to the Passenger Status Service.
  * You view the status reports through the Passenger Status Service.
 
-## Hosted service vs self-hosting
-
-The Passenger Status Service is an open source Rails app. Phusion provides a hosted version at [https://status-service.phusionpassenger.com](https://status-service.phusionpassenger.com). To get started, [sign up for an account](https://status-service.phusionpassenger.com/users/sign_up).
-
-The hosted version is easy to use, but the disadvantage is that we will have access to your data. [Wondering what data is sent?](https://status-service.phusionpassenger.com/faq#what_data). You can also choose to self-host this service. That way, you are in control of all your data.
-
 ## Self-hosting guide
 
 This app requires PostgreSQL.
